@@ -6,6 +6,13 @@
     <title>Document</title>
 </head>
 <body>
+    <?php
+    $conn = mysqli_connect("localhost", "root", "", "filmtabaza");
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    } 
     
+    
+    ?>
 </body>
 </html>
