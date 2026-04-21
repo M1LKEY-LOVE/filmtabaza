@@ -10,10 +10,15 @@ CREATE TABLE hry (
 
 
 
+DROP TABLE IF EXISTS users;
+
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    meno VARCHAR(100) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE
+    meno VARCHAR(50) NOT NULL,
+    priezvisko VARCHAR(50) NOT NULL,
+    heslo VARCHAR(255) NOT NULL, 
+    telefon VARCHAR(20) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL
 );
 
 INSERT INTO hry (nazov, zaner, vydavatel, rok_vydania, platforma, stav) VALUES
@@ -48,3 +53,15 @@ INSERT INTO hry (nazov, zaner, vydavatel, rok_vydania, platforma, stav) VALUES
 ('It Takes Two', 'Kooperatívna', 'EA', 2021, 'Xbox Series X', 'voľné'),
 ('League of Legends', 'MOBA', 'Riot Games', 2009, 'PC', 'voľné');
 
+
+INSERT INTO users (meno, priezvisko, heslo, telefon, email) VALUES 
+('Michal', 'Kováč', 'michal2024', '0905111222', 'michal.kovac@gmail.com'),
+('Jana', 'Nagyová', 'janicka99', '0911333444', 'jana.nagyova@gmail.com'),
+('Peter', 'Varga', 'petovarga1', '0902555666', 'peter.varga@gmail.com'),
+('Lucia', 'Bieliková', 'lucy_pass', '0948777888', 'lucia.bielikova@gmail.com'),
+('Marek', 'Tóth', 'marek_toth', '0903999000', 'marek.toth@gmail.com'),
+('Zuzana', 'Molnárová', 'zuzi12345', '0915222333', 'zuzana.molnarova@gmail.com'),
+('Tomáš', 'Horváth', 'tommy_h', '0907444555', 'tomas.horvath@gmail.com'),
+('Simona', 'Králová', 'simi_secret', '0940666777', 'simona.kralova@gmail.com'),
+('Andrej', 'Sloboda', 'andrej_sl', '0910888999', 'andrej.sloboda@gmail.com'),
+('Monika', 'Ševčíková', 'monika_pass', '0908123456', 'monika.sevcikova@gmail.com');
