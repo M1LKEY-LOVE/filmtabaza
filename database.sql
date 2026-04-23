@@ -6,6 +6,7 @@ CREATE TABLE hry (
     rok_vydania INT,
     platforma VARCHAR(50),
     stav VARCHAR(50) DEFAULT 'voľné'
+    hra_id INT,
 );
 
 
@@ -19,7 +20,19 @@ CREATE TABLE users (
     heslo VARCHAR(255) NOT NULL, 
     telefon VARCHAR(20) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL
+    user_id INT
 );
+
+
+CREATE TABLE vypozicky (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    hra_id INT,
+    datum_vypozicky TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (hra_id) REFERENCES hry(id)
+);
+
 
 INSERT INTO hry (nazov, zaner, vydavatel, rok_vydania, platforma, stav) VALUES
 ('The Witcher 3: Wild Hunt', 'RPG', 'CD Projekt', 2015, 'PS5', 'voľné'),
