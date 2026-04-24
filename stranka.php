@@ -1,10 +1,5 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "root"; 
-$db = "pozicovna"; 
-
-$conn = mysqli_connect($host, $user, $pass, $db);
+$conn = mysqli_connect("localhost", "root", "root", "pozicovna");
 
 if (!$conn) {
     die("Chyba pripojenia: " . mysqli_connect_error());
