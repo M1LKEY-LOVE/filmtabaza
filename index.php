@@ -95,7 +95,7 @@ if (isset($_COOKIE["logged"]) && isset($_POST['akcia'])) {
 
             <div class="d-flex justify-content-between mt-2">
                 <a href="register.php" class="text-decoration-none">Registrácia</a>
-                <a href="forgot_password.php" class="text-decoration-none small">Zabudnuté heslo?</a>
+                <a href="zmena_hesla.php" class="text-decoration-none small">Zabudol si heslo?</a>
             </div>
         </div>
 
