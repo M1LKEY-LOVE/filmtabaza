@@ -1,4 +1,3 @@
-
 <?php
 $host = "localhost";
 $user = "root";
@@ -11,8 +10,9 @@ if (!$conn) {
     die("Chyba pripojenia: " . mysqli_connect_error());
 }
 
+// kontrola existencie akcie a id v URL
 if (isset($_GET['akcia']) && isset($_GET['id'])) {
-    $id = intval($_GET['id']);
+    $id = intval($_GET['id']); 
 
     if ($_GET['akcia'] == "vypozicat") {
         mysqli_query($conn, "UPDATE hry SET stav = 'vypožičané' WHERE id = $id");
@@ -24,10 +24,12 @@ if (isset($_GET['akcia']) && isset($_GET['id'])) {
         mysqli_query($conn, "DELETE FROM vypozicky WHERE hra_id = $id");
     }
     
+    // obnova stranky po vykonanní akcie
     header("Location: index.php");
     exit();
 }
 
+// spojenie tabuliek a zabezpecenie toho ze nam zobrazi aj hry ktore nema nikto pozicane
 $sql = "SELECT hry.id, hry.nazov, hry.zaner, hry.platforma, hry.stav, users.meno, users.priezvisko
         FROM hry
         LEFT JOIN vypozicky ON hry.id = vypozicky.hra_id
@@ -41,6 +43,7 @@ $vysledok = mysqli_query($conn, $sql);
 <head>
     <title>Moja školská databáza hier</title>
     <style>
+        /* CSS štýly pre krajší vzhľad tabuľky */
         body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
         h1 { text-align: center; color: blue; }
         table { width: 90%; margin: 20px auto; border-collapse: collapse; background-color: white; }
@@ -70,6 +73,7 @@ $vysledok = mysqli_query($conn, $sql);
         </thead>
         <tbody>
             <?php 
+            //cyklus na vypisanie riadkov
             while($hra = mysqli_fetch_assoc($vysledok)) { 
             ?>
             <tr>
@@ -77,9 +81,11 @@ $vysledok = mysqli_query($conn, $sql);
                 <td><?php echo $hra['nazov']; ?></td>
                 <td><?php echo $hra['zaner']; ?></td>
                 <td><?php echo $hra['platforma']; ?></td>
+                
                 <td class="<?php echo ($hra['stav'] == 'voľné') ? 'volne' : 'obsadene'; ?>">
                     <?php echo $hra['stav']; ?>
                 </td>
+
                 <td>
                     <?php 
                         if($hra['meno'] != NULL) {
@@ -89,15 +95,20 @@ $vysledok = mysqli_query($conn, $sql);
                         }
                     ?>
                 </td>
+
                 <td>
-                    <?php if($hra['stav'] == "voľné") { ?>
+                    <?php 
+                    // tlacidlo na vypozicanie
+                    if($hra['stav'] == "voľné") { ?>
                         <a href="index.php?akcia=vypozicat&id=<?php echo $hra['id']; ?>">Vypožičať</a>
-                    <?php } else { ?>
+                    <?php } 
+                    // tlacidlo na vratenie
+                    else { ?>
                         <a href="index.php?akcia=vratit&id=<?php echo $hra['id']; ?>">Vrátiť</a>
                     <?php } ?>
                 </td>
             </tr>
-            <?php } ?>
+            <?php }  ?>
         </tbody>
     </table>
 

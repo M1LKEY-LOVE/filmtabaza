@@ -82,7 +82,7 @@ if (isset($_POST["register"])) {
                 <label class="form-label">Heslo</label>
                 <input type="password" name="heslo" class="form-control" required>
             </div>
-            <button type="submit" name="register" class="btn btn-success w-100 mb-3">Zaregistrovať sa</button>
+            <button type="submit" name="register" class="btn btn-primary btn-lg w-100 mb-3">Zaregistrovať sa</button>
             <div class="text-center">
                 <a href="index.php" class="text-decoration-none text-muted small">Naspäť na prihlásenie</a>
             </div>
