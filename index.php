@@ -111,6 +111,16 @@ if (isset($_COOKIE["logged"]) && isset($_POST['akcia'])) {
                     </form>
                 </div>
             </div>
+            <!-- formular na pridanie hry do table -->
+
+            <form action="pridaj_hru.php" method="POST" style="text-align:center; margin:20px;">
+                <input type="text" name="nazov" placeholder="Názov hry" required>
+                <input type="text" name="zaner" placeholder="Žáner" required>
+                <input type="text" name="platforma" placeholder="Platforma" required>
+                <button type="submit" style="padding:10px 15px; background-color:green; color:white; border:none; cursor:pointer;">
+                    Pridať hru
+                </button>
+            </form>
 
             <div class="table-responsive">
                 <table class="table table-hover text-center">
@@ -125,6 +135,7 @@ if (isset($_COOKIE["logged"]) && isset($_POST['akcia'])) {
                     </thead>
                     <tbody>
                         <?php
+                        // spojenie tabuliek a zabezpecenie toho ze nam zobrazi aj hry ktore nema nikto pozicane
                         $sql_prikaz = "SELECT hry.*, users.meno, users.priezvisko, vypozicky.user_id AS vypozical_id
                                        FROM hry 
                                        LEFT JOIN vypozicky ON hry.id = vypozicky.hra_id
